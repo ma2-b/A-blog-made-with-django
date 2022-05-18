@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+    <!-- Page Content -->
+    {% if user.is_authenticated %} 
+      <p>Profile information:<p>
+      <ul class=" navbar-nav ml-auto">
+    
+          {% if user.profile.id %}
+            <li>
+              <a href="{% url 'accounts:show_profile' user.profile.id %}">{{user.username}} 
+              </a>
+            </li>
+          {% endif %}
+          <br>
+          <li>
+            <a href="{% url 'accounts:show_profile' user.profile.id %}">Show Profile Page</a>
+          </li>
+        {% endif %}
+      </ul>
+    <div class="container">
+
+      <div class="row">
+
+        <!-- Blog Entries Column -->
+        <div class="col-md-12">
+
+          <!-- First Blog Post -->
+          {% for post in posts  %}
+          <h2 class="post-title">
+            <a href="#">{{post.title}}</a>
+          </h2>
+          <p class="lead">
+            by {{post.author}}  
+            {% if user.is_authenticated %} 
+              {% if user.id == post.author.id %}
+              - <a class="btn btn-default" href="{% url 'blog:update_post' post.id %}">Edit</a> 
+              - 
+              <a class="btn btn-danger" href="{% url 'blog:delete_post' post.id %}">Delete</a>
+              {% endif %}
+            {% endif %}
+          </p>
+          <p><span class="glyphicon glyphicon-time"></span> Posted on {{post.created_at}}</p>
+          <p>{{post.description}}.</p>
+          <a class="btn btn-default" href="{% url 'blog:article-detail' post.id %}">Read More</a>
+          <br><br><br><br>
+          <hr>
+
+          {% endfor %}
+
+
+
+
+
+        
+          
+{% endblock body %}
+

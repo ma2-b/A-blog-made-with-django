@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block body %}
+{% if user.is_authenticated %}
+<h2>Add category</h2>
+<br><br><br>
+<form method="POST">
+ 
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+        <button type="submit" class="btn btn-primary">Add category</button>
+    {% endbuttons %}
+
+{% else %}
+you are not allowed here
+
+{% endif %}
+{% endblock body %}

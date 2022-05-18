@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block body %}
+<h2>Edit Settings</h2>
+
+<br><br><br>
+<form method="POST">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+        <button type="submit" class="btn btn-primary" >Update Settings</button>
+    {% endbuttons %}
+
+
+
+
+{% endblock body %}
